@@ -13,7 +13,7 @@
 */
 
 const TITLE = "Countdown to New Year's";
-const VERSION = '1.0.1';
+const VERSION = '1.1.0';
 
 const TRICKLE_COUNT = 200;
 
@@ -37,13 +37,22 @@ var nyInt = window.setInterval(function() {
     if (isNewYear()) {
         out = ['Happy New Year!'];
         if (!setToNyear) {
-            $('.trickle').css({'animation-duration': '2s', 'background-color': 'silver', 'animation-direction': 'alternate'});
+            for (const trickle of document.querySelectorAll('.trickle')) {
+                trickle.style.backgroundColor = 'silver';
+                trickle.style.animationDirection = 'alternate';
+                trickle.style.animationDuration = '2s';
+            }
+            
             setToNyear = true;
         }
     } else {
         if (setToNyear) {
             setToNyear = false;
-            $('.trickle').css({'animation-duration': '20s', 'background-color': '#222', 'animation-direction': 'normal'});
+            for (const trickle of document.querySelectorAll('.trickle')) {
+                trickle.style.backgroundColor = '#222';
+                trickle.style.animationDirection = 'normal';
+                trickle.style.animationDuration = '20s';
+            }
         }
     }
     var output = out.join(':')
@@ -88,21 +97,21 @@ function toggleTrickle() {
 }
 
 
-$(function() {
-    $('#version').html(VERSION);
-    
-    for (var x = 0; x < TRICKLE_COUNT; x++) {
-        var $el = $('<div class="trickle trickle-hidden"></div>');
-        $el.css({left: 100 * Math.random() + '%', 'animation-delay': 60 * Math.random() + 's'});
-        $el.appendTo('body');
-    }
-    
-    if (trickleEnabled || isNewYear()) toggleTrickle();
-});
-
-
 // GitHub Pages version header
 window.onload = function() {
+    document.getElementById('version').textContent = VERSION;
+    
+    for (var x = 0; x < TRICKLE_COUNT; x++) {
+        var el = document.createElement('div');
+        el.classList.add('trickle', 'trickle-hidden');
+        el.style.left = 100 * Math.random() + '%';
+        el.style.animationDelay = 60 * Math.random() + 's';
+        document.body.appendChild(el);
+    }
+    
+    if (trickleEnabled || isNewYear()) toggleTrickle();    
+    
+    
     document.querySelector('#hamburger-menu').onclick = function(e) {
         var items = document.querySelectorAll('.menu-item');
 

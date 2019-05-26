@@ -2,6 +2,11 @@
 
 This is taken from an <a href="https://jsfiddle.net/SirKoik/2vu6xh3s/">old JS Fiddle</a>.
 
+## Versions
+
+### 1.1.0
+Removed jQuery
+
 ## From the source code
 
 This is derived from the Christmas countdown, and is a simplified version of it.

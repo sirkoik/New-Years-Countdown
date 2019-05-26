@@ -34,6 +34,8 @@ body {
 }
 
 .trickle {
+    will-change: transform;
+    
     top: -20px;
     width: 0.2vw;
     height: 20px;

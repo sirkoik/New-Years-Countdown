@@ -15,41 +15,42 @@
 const TITLE = "Countdown to New Year's";
 const VERSION = '1.0.1';
 
-const TRICKLE_COUNT = 100;
+const TRICKLE_COUNT = 200;
 
 var setToNyear = false;
 var trickleEnabled = false;
-var isNewYear = (new Date().getMonth() == 0 && new Date().getDate() == 1);
+
+function isNewYear() {
+    return (new Date().getMonth() == 0 && new Date().getDate() == 1);
+}
 
 var nyInt = window.setInterval(function() {
+    var d = returnNewYearDiff(new Date(), true);
 
-		var d = returnNewYearDiff(new Date(), true);
+    var out = [];
 
-		var out = [];
-      
-			if (d.days > 0) out.push(d.days);
-			if (!(d.days == 0 && d.hours == 0)) out.push(fz(d.hours));
-			if (!(d.days == 0 && d.hours == 0 && d.minutes == 0)) out.push(fz(d.minutes));
-			out.push(fz(d.seconds));
+    if (d.days > 0) out.push(d.days);
+    if (!(d.days == 0 && d.hours == 0)) out.push(fz(d.hours));
+    if (!(d.days == 0 && d.hours == 0 && d.minutes == 0)) out.push(fz(d.minutes));
+    out.push(fz(d.seconds));
 
-			if (new Date().getDate() == 1 && new Date().getMonth() == 0) {
-      out = ['Happy New Year!'];
-      if (!setToNyear) {
-        	$('.trickle').css({'animation-duration': '2s', 'background-color': 'silver', 'animation-direction': 'alternate'});
-        	setToNyear = true;
-        } 
-      } else {
-      if (setToNyear) {
-        	setToNyear = false;
-          $('.trickle').css({'animation-duration': '20s', 'background-color': '#222', 'animation-direction': 'normal'});
-      }			
+    if (isNewYear()) {
+        out = ['Happy New Year!'];
+        if (!setToNyear) {
+            $('.trickle').css({'animation-duration': '2s', 'background-color': 'silver', 'animation-direction': 'alternate'});
+            setToNyear = true;
+        }
+    } else {
+        if (setToNyear) {
+            setToNyear = false;
+            $('.trickle').css({'animation-duration': '20s', 'background-color': '#222', 'animation-direction': 'normal'});
+        }
+    }
+    var output = out.join(':')
 
-      }
-        var output = out.join(':')
-
-        document.title = TITLE + ': ' + output;
-		document.getElementById('counter').innerHTML = output;
-	}, 500);
+    document.title = TITLE + ': ' + output;
+    document.getElementById('counter').innerHTML = output;
+}, 500);
 
 function returnNewYearDiff(date, timeZoneCorrection) {
 
@@ -96,7 +97,7 @@ $(function() {
         $el.appendTo('body');
     }
     
-    if (trickleEnabled || isNewYear) toggleTrickle();
+    if (trickleEnabled || isNewYear()) toggleTrickle();
 });
 
 

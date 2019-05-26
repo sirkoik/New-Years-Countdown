@@ -28,22 +28,22 @@ body {
     -webkit-text-stroke: 0.1vw #777;
 }
   
-  @keyframes trickleAnim {
-  from {top: -20px;}
-  to {top: 100%;}
+@keyframes trickleAnim {
+    from {top: -20px;}
+    to {top: 100%;}
 }
 
 .trickle {
-  top: -20px;
-  width: 0.2vw;
-  height:20px;
-  background-color:#222;
-  position: absolute;
-  animation-name: trickleAnim;
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in;
-  animation-direction: normal;
+    top: -20px;
+    width: 0.2vw;
+    height: 20px;
+    background-color: #222;
+    position: absolute;
+    animation-name: trickleAnim;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    /*animation-timing-function: ease-in;*/
+    animation-direction: normal;
 }
 
 .trickle-hidden {

@@ -15,7 +15,10 @@
 const TITLE = "Countdown to New Year's";
 const VERSION = '1.0.1';
 
+const TRICKLE_COUNT = 100;
+
 var setToNyear = false;
+var trickleEnabled = true;
 
 var nyInt = window.setInterval(function() {
 
@@ -74,16 +77,25 @@ function fz(num) {
 	return num < 10? '0'+num : num;
 }
 
+function toggleTrickle() {
+    var trickles = document.querySelectorAll('.trickle');
+
+    for (const trickle of trickles) {
+        trickle.classList.toggle('trickle-hidden');
+    }
+}
+
 
 $(function() {
-    for (var x = 0; x < 200; x++) {
-        var $el = $('<div class="trickle"></div>');
+    $('#version').html(VERSION);
+    
+    for (var x = 0; x < TRICKLE_COUNT; x++) {
+        var $el = $('<div class="trickle trickle-hidden"></div>');
         $el.css({left: 100 * Math.random() + '%', 'animation-delay': 60 * Math.random() + 's'});
         $el.appendTo('body');
-        //console.log(x);
     }
     
-    $('#version').html(VERSION);
+    if (trickleEnabled) toggleTrickle();
 });
 
 
@@ -95,6 +107,10 @@ window.onload = function() {
         for (const item of items) {
             item.classList.toggle('menu-item-hidden');
         }
+    }
+    
+    document.querySelector('#toggle-trickle').onclick = function(e) {
+        toggleTrickle();
     }
 
     document.querySelector('#credits-link').onclick = function(e) {

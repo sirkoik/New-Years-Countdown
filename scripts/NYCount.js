@@ -18,7 +18,8 @@ const VERSION = '1.0.1';
 const TRICKLE_COUNT = 100;
 
 var setToNyear = false;
-var trickleEnabled = true;
+var trickleEnabled = false;
+var isNewYear = (new Date().getMonth() == 0 && new Date().getDate() == 1);
 
 var nyInt = window.setInterval(function() {
 
@@ -95,7 +96,7 @@ $(function() {
         $el.appendTo('body');
     }
     
-    if (trickleEnabled) toggleTrickle();
+    if (trickleEnabled || isNewYear) toggleTrickle();
 });
 
 

@@ -1,6 +1,7 @@
 body {
-  background-color: #070823;
-  overflow: hidden;
+    background-color: #070823;
+    overflow: hidden;
+    font-family: monospace;
 }
 
 #counter-container {
@@ -14,6 +15,7 @@ body {
 }
 
 #counter {
+    font-family: serif;
     font-size: 15vw;
     display:table-cell;
     vertical-align:middle;
